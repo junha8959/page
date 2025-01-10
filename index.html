@@ -37,6 +37,14 @@
             text-align: center;
             word-break: break-word;
         }
+        #actionDescription {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f1f3f5;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            display: none;
+        }
         h2 {
             text-align: center;
             margin-top: 20px;
@@ -49,13 +57,13 @@
     <form id="linkForm">
         <div class="mb-3">
             <label for="action" class="form-label">액션 선택</label>
-              <select id="sortOptions" class="form-select ms-2" onchange="sortActions()">
+            <select id="sortOptions" class="form-select ms-2" onchange="sortActions()">
                     <option value="">-- 정렬 기준 선택 --</option>
                     <option value="nameAsc">이름순 오름차순</option>
                     <option value="nameDesc">이름순 내림차순</option>
                     <option value="valueAsc">값순 오름차순</option>
                     <option value="valueDesc">값순 내림차순</option>
-                </select>
+            </select>
             <select id="action" name="action" class="form-select" onchange="updateFields()">
                 <option value="">-- 선택하세요 --</option>
                 <option value="ACTION_LINK_ALARM">알림함으로 이동 (ACTION_LINK_ALARM)</option>
@@ -80,6 +88,7 @@
                 <option value="ACTION_LINK_PRODUCT_SEARCH">상품 검색 화면 (ACTION_LINK_PRODUCT_SEARCH)</option>
                 <option value="ACTION_LINK_ORDER">주문 목록 화면 (ACTION_LINK_ORDER)</option>
             </select>
+            <div id="actionDescription"></div>
         </div>
 
         <div class="mb-3" style="display: none;" id="projectWrapper">
@@ -121,7 +130,7 @@
 
     <script>
         const actionRequirements = {
-            ACTION_LINK_ALARM: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
+            ACTION_LINK_ALARM: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"], description: "알림 화면으로 이동합니다."},
             ACTION_LINK_INQUIRY_WRITE: { required: [], optional: [] ,projects: ["COMMON"]},
             ACTION_LINK_MILEAGE: { required: [], optional: [] ,projects: []},
             ACTION_LINK_PAY_MANAGEMENT: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
