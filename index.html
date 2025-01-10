@@ -28,10 +28,18 @@
         button {
             margin-top: 10px;
         }
+        .btn-light {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+        }
         #generatedLink {
             margin-top: 20px;
             text-align: center;
             word-break: break-word;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -42,20 +50,20 @@
         <div class="mb-3">
             <label for="project" class="form-label">프로젝트 선택</label>
             <select id="project" name="project" class="form-select">
-                <option value="COMMON">공통</option>
-                <option value="BUS">버스</option>
-                <option value="DELIVERY">배달</option>
-                <option value="FLOWER">꽃배달</option>
-                <option value="MEDICAL">병의원</option>
-                <option value="RESERVE">예약</option>
-                <option value="TAXI">택시</option>
-                <option value="DRIVER">대리</option>
-                <option value="ELECTRIC">전자관</option>
-                <option value="BIZ">비즈</option>
-                <option value="BIZ_TAXI">비즈_택시</option>
-                <option value="BIZ_DRIVER">비즈_대리</option>
-                <option value="BIZ_DELIVERY">비즈_배달</option>
-                <option value="BIZ_FLOWER">비즈_꽃배달</option>
+                <option value="COMMON">공통 (COMMON)</option>
+                <option value="BUS">버스 (BUS)</option>
+                <option value="DELIVERY">배달 (DELIVERY)</option>
+                <option value="FLOWER">꽃배달 (FLOWER)</option>
+                <option value="MEDICAL">병의원 (MEDICAL)</option>
+                <option value="RESERVE">예약 (RESERVE)</option>
+                <option value="TAXI">택시 (TAXI)</option>
+                <option value="DRIVER">대리 (DRIVER)</option>
+                <option value="ELECTRIC">전자관 (ELECTRIC)</option>
+                <option value="BIZ">비즈 (BIZ)</option>
+                <option value="BIZ_TAXI">비즈_택시 (BIZ_TAXI)</option>
+                <option value="BIZ_DRIVER">비즈_대리 (BIZ_DRIVER)</option>
+                <option value="BIZ_DELIVERY">비즈_배달 (BIZ_DELIVERY)</option>
+                <option value="BIZ_FLOWER">비즈_꽃배달 (BIZ_FLOWER)</option>
             </select>
         </div>
 
@@ -63,26 +71,26 @@
             <label for="action" class="form-label">액션 선택</label>
             <select id="action" name="action" class="form-select" onchange="updateFields()">
                 <option value="">-- 선택하세요 --</option>
-                <option value="ACTION_LINK_ALARM">알림함으로 이동</option>
-                <option value="ACTION_LINK_INQUIRY_WRITE">고객소리함 화면으로 이동</option>
-                <option value="ACTION_LINK_MILEAGE">마일리지 화면으로 이동</option>
-                <option value="ACTION_LINK_PAY_MANAGEMENT">결제수단 관리 화면으로 이동</option>
-                <option value="ACTION_LINK_COUPON_PUBLISH">쿠폰 등록 화면</option>
-                <option value="ACTION_LINK_VOUCHER_PRODUCT_LIST">상품권 구매 화면</option>
-                <option value="ACTION_LINK_VOUCHER">상품권 보관함으로 이동</option>
-                <option value="ACTION_LINK_NOTICE">공지사항 상세</option>
-                <option value="ACTION_LINK_EVENT">이벤트 상세</option>
-                <option value="ACTION_LINK_BRAND_LIST">브랜드 목록 화면</option>
-                <option value="ACTION_LINK_SHOP_SEARCH">상점 검색</option>
-                <option value="ACTION_LINK_SHOP_LIST">상점 목록 화면</option>
-                <option value="ACTION_LINK_MENU">메뉴 상세 화면</option>
-                <option value="ACTION_LINK_TRADITION_LIST">전통시장 목록 화면</option>
-                <option value="ACTION_LINK_TRADITION">전통시장 상세 화면</option>
-                <option value="ACTION_LINK_ALLEY">골목상권 화면</option>
-                <option value="ACTION_LINK_PRODUCT_LIST">상품 목록 화면</option>
-                <option value="ACTION_LINK_PRODUCT">상품 상세 화면</option>
-                <option value="ACTION_LINK_PRODUCT_SEARCH">상품 검색 화면</option>
-                <option value="ACTION_LINK_ORDER">주문 목록 화면</option>
+                <option value="ACTION_LINK_ALARM">알림함으로 이동 (ACTION_LINK_ALARM)</option>
+                <option value="ACTION_LINK_INQUIRY_WRITE">고객소리함 화면으로 이동 (ACTION_LINK_INQUIRY_WRITE)</option>
+                <option value="ACTION_LINK_MILEAGE">마일리지 화면으로 이동 (ACTION_LINK_MILEAGE)</option>
+                <option value="ACTION_LINK_PAY_MANAGEMENT">결제수단 관리 화면으로 이동 (ACTION_LINK_PAY_MANAGEMENT)</option>
+                <option value="ACTION_LINK_COUPON_PUBLISH">쿠폰 등록 화면 (ACTION_LINK_COUPON_PUBLISH)</option>
+                <option value="ACTION_LINK_VOUCHER_PRODUCT_LIST">상품권 구매 화면 (ACTION_LINK_VOUCHER_PRODUCT_LIST)</option>
+                <option value="ACTION_LINK_VOUCHER">상품권 보관함으로 이동 (ACTION_LINK_VOUCHER)</option>
+                <option value="ACTION_LINK_NOTICE">공지사항 상세 (ACTION_LINK_NOTICE)</option>
+                <option value="ACTION_LINK_EVENT">이벤트 상세 (ACTION_LINK_EVENT)</option>
+                <option value="ACTION_LINK_BRAND_LIST">브랜드 목록 화면 (ACTION_LINK_BRAND_LIST)</option>
+                <option value="ACTION_LINK_SHOP_SEARCH">상점 검색 (ACTION_LINK_SHOP_SEARCH)</option>
+                <option value="ACTION_LINK_SHOP_LIST">상점 목록 화면 (ACTION_LINK_SHOP_LIST)</option>
+                <option value="ACTION_LINK_MENU">메뉴 상세 화면 (ACTION_LINK_MENU)</option>
+                <option value="ACTION_LINK_TRADITION_LIST">전통시장 목록 화면 (ACTION_LINK_TRADITION_LIST)</option>
+                <option value="ACTION_LINK_TRADITION">전통시장 상세 화면 (ACTION_LINK_TRADITION)</option>
+                <option value="ACTION_LINK_ALLEY">골목상권 화면 (ACTION_LINK_ALLEY)</option>
+                <option value="ACTION_LINK_PRODUCT_LIST">상품 목록 화면 (ACTION_LINK_PRODUCT_LIST)</option>
+                <option value="ACTION_LINK_PRODUCT">상품 상세 화면 (ACTION_LINK_PRODUCT)</option>
+                <option value="ACTION_LINK_PRODUCT_SEARCH">상품 검색 화면 (ACTION_LINK_PRODUCT_SEARCH)</option>
+                <option value="ACTION_LINK_ORDER">주문 목록 화면 (ACTION_LINK_ORDER)</option>
             </select>
         </div>
 
@@ -97,7 +105,7 @@
         <button type="button" class="btn btn-primary w-100" onclick="generateLink()">링크 생성</button>
     </form>
 
-    <h2 class="mt-4">생성된 링크:</h2>
+    <h2>생성된 링크</h2>
     <div class="text-center">
         <p id="generatedLink" class="p-2 bg-light border rounded"></p>
         <button id="copyButton" class="btn btn-secondary" style="display: none;" onclick="copyToClipboard()">복사</button>
@@ -113,7 +121,16 @@
             ACTION_LINK_NOTICE: { required: ["code"], optional: [] },
             ACTION_LINK_EVENT: { required: ["eventCode"], optional: [] },
             ACTION_LINK_MENU: { required: ["shopCode"], optional: ["menuCode"] },
-            // Add more actions here
+            ACTION_LINK_PRODUCT: { required: ["productCode"], optional: ["projectSub"] },
+            ACTION_LINK_ORDER: { required: ["orderNo"], optional: [] },
+            ACTION_LINK_BRAND_LIST: { required: [], optional: [] },
+            ACTION_LINK_SHOP_SEARCH: { required: [], optional: [] },
+            ACTION_LINK_SHOP_LIST: { required: [], optional: [] },
+            ACTION_LINK_TRADITION_LIST: { required: [], optional: [] },
+            ACTION_LINK_TRADITION: { required: [], optional: [] },
+            ACTION_LINK_ALLEY: { required: [], optional: [] },
+            ACTION_LINK_PRODUCT_LIST: { required: [], optional: [] },
+            ACTION_LINK_PRODUCT_SEARCH: { required: [], optional: [] },
         };
 
         function updateFields() {
@@ -137,74 +154,4 @@
             optional.forEach(field => {
                 dynamicFields.innerHTML += `
                     <div class="mb-3">
-                        <label for="${field}" class="form-label">(선택) ${field}</label>
-                        <input type="text" id="${field}" name="${field}" class="form-control" placeholder="${field}">
-                    </div>
-                `;
-            });
-        }
-
-        function generateLink() {
-            const baseUrl = "https://app.daeguro.co.kr/app/public_link.html?";
-            const project = document.getElementById('project').value;
-            const action = document.getElementById('action').value;
-
-            if (!action) {
-                alert('액션을 선택하세요!');
-                return;
-            }
-
-            const { required, optional } = actionRequirements[action];
-
-            let queryParams = `project=${project}&action=${action}`;
-
-            for (const field of required) {
-                const value = document.getElementById(field)?.value;
-                if (!value) {
-                    alert(`${field}는 필수 입력 항목입니다.`);
-                    return;
-                }
-                queryParams += `&${field}=${value}`;
-            }
-
-            for (const field of optional) {
-                const value = document.getElementById(field)?.value;
-                if (value) {
-                    queryParams += `&${field}=${value}`;
-                }
-            }
-
-            const fullLink = `${baseUrl}${queryParams}`;
-
-            const linkElement = document.getElementById('generatedLink');
-            linkElement.innerText = fullLink;
-
-            document.getElementById('copyButton').style.display = 'inline-block';
-        }
-
-        function copyToClipboard() {
-            const linkElement = document.getElementById('generatedLink');
-            navigator.clipboard.writeText(linkElement.innerText)
-                .then(() => alert('링크가 복사되었습니다!'))
-                .catch(() => alert('복사에 실패했습니다.'));
-        }
-
-        function resetAllFields() {
-            document.getElementById('project').value = 'COMMON';
-            document.getElementById('action').value = '';
-            document.getElementById('dynamicFields').innerHTML = '';
-            document.getElementById('generatedLink').innerText = '';
-            document.getElementById('copyButton').style.display = 'none';
-        }
-
-        function resetAction() {
-            document.getElementById('action').value = '';
-            updateFields();
-        }
-
-        function resetDynamicFields() {
-            document.getElementById('dynamicFields').innerHTML = '';
-        }
-    </script>
-</body>
-</html>
+                        <label for="${field}" class="form-label">
