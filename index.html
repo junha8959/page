@@ -47,7 +47,7 @@
     <h1>링크 생성기</h1>
 
     <form id="linkForm">
-         <div class="mb-3">
+        <div class="mb-3">
             <label for="action" class="form-label">액션 선택</label>
             <select id="action" name="action" class="form-select" onchange="updateFields()">
                 <option value="">-- 선택하세요 --</option>
@@ -74,8 +74,8 @@
                 <option value="ACTION_LINK_ORDER">주문 목록 화면 (ACTION_LINK_ORDER)</option>
             </select>
         </div>
-        
-        <div class="mb-3">
+
+        <div class="mb-3" style="display: none;" id="projectWrapper">
             <label for="project" class="form-label">프로젝트 선택</label>
             <select id="project" name="project" class="form-select">
                 <option value="COMMON">공통 (COMMON)</option>
@@ -137,27 +137,24 @@
             ACTION_LINK_ORDER: { required: [], optional: ["orderNo"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]}
         };
 
-        // 액션 선택 시 호출되는 함수
         function updateFields() {
             const action = document.getElementById('action').value;
+            const projectWrapper = document.getElementById('projectWrapper');
             const projectDropdown = document.getElementById('project');
-            const projectDropdownWrapper = projectDropdown.parentElement;
             const dynamicFields = document.getElementById('dynamicFields');
-    
+
             dynamicFields.innerHTML = '';
-            projectDropdown.innerHTML = '';
-    
+
             if (!action || !actionRequirements[action]) {
-                // 액션이 없으면 드롭다운 숨기기
-                projectDropdownWrapper.style.display = 'none';
+                projectWrapper.style.display = 'none';
                 return;
             }
-    
+
             const { required, optional, projects } = actionRequirements[action];
-    
+
             if (projects.length > 0) {
-                // 프로젝트 드롭다운 표시 및 옵션 추가
-                projectDropdownWrapper.style.display = 'block';
+                projectWrapper.style.display = 'block';
+                projectDropdown.innerHTML = '';
                 projects.forEach(project => {
                     const option = document.createElement('option');
                     option.value = project;
@@ -165,10 +162,9 @@
                     projectDropdown.appendChild(option);
                 });
             } else {
-                // 해당 프로젝트가 없으면 드롭다운 숨기기
-                projectDropdownWrapper.style.display = 'none';
+                projectWrapper.style.display = 'none';
             }
-    
+
             required.forEach(field => {
                 dynamicFields.innerHTML += `
                     <div class="mb-3">
@@ -177,7 +173,7 @@
                     </div>
                 `;
             });
-    
+
             optional.forEach(field => {
                 dynamicFields.innerHTML += `
                     <div class="mb-3">
@@ -187,7 +183,7 @@
                 `;
             });
         }
-    
+
         function generateLink() {
             const baseUrl = "https://app.daeguro.co.kr/app/public_link.html?";
             const project = document.getElementById('project').value;
@@ -200,7 +196,11 @@
 
             const { required, optional } = actionRequirements[action];
 
-            let queryParams = `project=${project}&action=${action}`;
+            let queryParams = `action=${action}`;
+
+            if (project) {
+                queryParams += `&project=${project}`;
+            }
 
             for (const field of required) {
                 const value = document.getElementById(field)?.value;
@@ -233,15 +233,14 @@
                 .catch(() => alert('복사에 실패했습니다.'));
         }
 
-         function resetAllFields() {
+        function resetAllFields() {
             document.getElementById('action').value = '';
             document.getElementById('dynamicFields').innerHTML = '';
             document.getElementById('generatedLink').innerText = '';
             document.getElementById('copyButton').style.display = 'none';
-            const projectDropdownWrapper = document.getElementById('project').parentElement;
-            projectDropdownWrapper.style.display = 'none';
+            const projectWrapper = document.getElementById('projectWrapper');
+            projectWrapper.style.display = 'none';
         }
-
 
         function resetAction() {
             document.getElementById('action').value = '';
