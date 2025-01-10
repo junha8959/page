@@ -164,37 +164,53 @@
             const projectDropdown = document.getElementById('project');
             const dynamicFields = document.getElementById('dynamicFields');
             const actionDescription = document.getElementById('actionDescription');
-
+        
             dynamicFields.innerHTML = '';
-
+        
             if (!action || !actionRequirements[action]) {
                 projectWrapper.style.display = 'none';
                 actionDescription.style.display = 'none';
                 return;
             }
-
+        
             const { required, optional, projects, description } = actionRequirements[action];
-
+        
             if (description) {
                 actionDescription.style.display = 'block';
-                actionDescription.innerHTML = description; // innerText → innerHTML
+                actionDescription.innerHTML = description;
             } else {
                 actionDescription.style.display = 'none';
             }
-
+        
             if (projects.length > 0) {
                 projectWrapper.style.display = 'block';
                 projectDropdown.innerHTML = '';
                 projects.forEach(project => {
                     const option = document.createElement('option');
+                    const projectLabelMap = {
+                        COMMON: "공통 (COMMON)",
+                        DELIVERY: "배달 (DELIVERY)",
+                        FLOWER: "꽃배달 (FLOWER)",
+                        TAXI: "택시 (TAXI)",
+                        DRIVER: "대리 (DRIVER)",
+                        BUS: "버스 (BUS)",
+                        MEDICAL: "병의원 (MEDICAL)",
+                        RESERVE: "예약 (RESERVE)",
+                        ELECTRIC: "전자관 (ELECTRIC)",
+                        BIZ: "비즈 (BIZ)",
+                        BIZ_TAXI: "비즈 택시 (BIZ_TAXI)",
+                        BIZ_DRIVER: "비즈 대리 (BIZ_DRIVER)",
+                        BIZ_DELIVERY: "비즈 배달 (BIZ_DELIVERY)",
+                        BIZ_FLOWER: "비즈 꽃배달 (BIZ_FLOWER)"
+                    };
                     option.value = project;
-                    option.textContent = project;
+                    option.innerHTML = projectLabelMap[project] || project; // 매핑된 값이 없으면 기본값 표시
                     projectDropdown.appendChild(option);
                 });
             } else {
                 projectWrapper.style.display = 'none';
             }
-
+        
             required.forEach(field => {
                 dynamicFields.innerHTML += `
                     <div class="mb-3">
@@ -203,7 +219,7 @@
                     </div>
                 `;
             });
-
+        
             optional.forEach(field => {
                 dynamicFields.innerHTML += `
                     <div class="mb-3">
@@ -213,6 +229,7 @@
                 `;
             });
         }
+
 
         function generateLink() {
             const baseUrl = "https://app.daeguro.co.kr/app/public_link.html?";
@@ -277,9 +294,9 @@
         }
 
         function resetProject() {
-    const projectDropdown = document.getElementById('project');
-    projectDropdown.value = projectDropdown.options[0].value;
-}
+            const projectDropdown = document.getElementById('project');
+            projectDropdown.value = projectDropdown.options[0].value;
+        }
 
         function resetDynamicFields() {
             document.getElementById('dynamicFields').innerHTML = '';
