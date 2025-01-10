@@ -61,31 +61,32 @@
 
         <div class="mb-3">
             <label for="action" class="form-label">액션 선택</label>
-            <select id="action" name="action" class="form-select" onchange="updateSubActionFields()">
-                <option value="ACTION_LINK_ALARM">링크 알람</option>
-                <option value="ACTION_LINK_INQUIRY_WRITE">문의 작성</option>
-                <option value="ACTION_LINK_MILEAGE">마일리지</option>
-                <option value="ACTION_LINK_PAY_MANAGEMENT">결제 관리</option>
-                <option value="ACTION_LINK_COUPON_PUBLISH">쿠폰 발행</option>
-                <option value="ACTION_LINK_VOUCHER_PRODUCT_LIST">상품 목록</option>
-                <option value="ACTION_LINK_VOUCHER">바우처</option>
-                <option value="ACTION_LINK_NOTICE">공지사항</option>
+            <select id="action" name="action" class="form-select" onchange="updateSubActionVisibility()">
+                <option value="">-- 선택하세요 --</option>
                 <option value="ACTION_LINK_EVENT">이벤트</option>
-                <option value="ACTION_LINK_BRAND_LIST">브랜드 목록</option>
-                <option value="ACTION_LINK_SHOP_SEARCH">상점 검색</option>
-                <option value="ACTION_LINK_SHOP_LIST">상점 목록</option>
                 <option value="ACTION_LINK_MENU">메뉴</option>
-                <option value="ACTION_LINK_PRODUCT_LIST">상품 목록</option>
-                <option value="ACTION_LINK_PRODUCT">상품</option>
                 <option value="ACTION_LINK_ORDER">주문</option>
             </select>
         </div>
 
-        <div id="subActionFields"></div>
+        <div id="subActionFields" style="display: none;">
+            <div id="subActionEvent" style="display: none;">
+                <div class="mb-3">
+                    <label for="eventCode" class="form-label">이벤트 코드</label>
+                    <input type="text" id="eventCode" name="eventCode" class="form-control" placeholder="이벤트 코드">
+                </div>
+            </div>
 
-        <div class="mb-3">
-            <label for="eventCode" class="form-label">이벤트 게시물 번호</label>
-            <input type="text" id="eventCode" name="eventCode" class="form-control" placeholder="게시물번호">
+            <div id="subActionMenu" style="display: none;">
+                <div class="mb-3">
+                    <label for="shopCode" class="form-label">상점 코드</label>
+                    <input type="text" id="shopCode" name="shopCode" class="form-control" placeholder="상점 코드">
+                </div>
+                <div class="mb-3">
+                    <label for="menuCode" class="form-label">메뉴 코드</label>
+                    <input type="text" id="menuCode" name="menuCode" class="form-control" placeholder="메뉴 코드">
+                </div>
+            </div>
         </div>
 
         <button type="button" class="btn btn-primary w-100" onclick="generateLink()">링크 생성</button>
@@ -98,27 +99,22 @@
     </div>
 
     <script>
-        function updateSubActionFields() {
+        function updateSubActionVisibility() {
             const action = document.getElementById('action').value;
             const subActionFields = document.getElementById('subActionFields');
-            subActionFields.innerHTML = '';
+            const subActionEvent = document.getElementById('subActionEvent');
+            const subActionMenu = document.getElementById('subActionMenu');
+
+            subActionFields.style.display = 'none';
+            subActionEvent.style.display = 'none';
+            subActionMenu.style.display = 'none';
 
             if (action === 'ACTION_LINK_EVENT') {
-                subActionFields.innerHTML = `
-                    <div class="mb-3">
-                        <label for="eventCode" class="form-label">이벤트 코드</label>
-                        <input type="text" id="eventCode" name="eventCode" class="form-control" placeholder="이벤트 코드">
-                    </div>`;
+                subActionFields.style.display = 'block';
+                subActionEvent.style.display = 'block';
             } else if (action === 'ACTION_LINK_MENU') {
-                subActionFields.innerHTML = `
-                    <div class="mb-3">
-                        <label for="shopCode" class="form-label">상점 코드</label>
-                        <input type="text" id="shopCode" name="shopCode" class="form-control" placeholder="상점 코드">
-                    </div>
-                    <div class="mb-3">
-                        <label for="menuCode" class="form-label">메뉴 코드</label>
-                        <input type="text" id="menuCode" name="menuCode" class="form-control" placeholder="메뉴 코드">
-                    </div>`;
+                subActionFields.style.display = 'block';
+                subActionMenu.style.display = 'block';
             }
         }
 
