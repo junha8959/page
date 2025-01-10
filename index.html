@@ -39,6 +39,7 @@
         }
         #actionDescription {
             padding: 10px;
+            margin-top: 20px;
             background-color: #f1f3f5;
             border: 1px solid #dee2e6;
             border-radius: 5px;
@@ -231,8 +232,7 @@
                 queryParams += `&project=${project}`;
             }
             
-            queryParams = `action=${action}`;
-
+            queryParams += `action=${action}`;
 
             for (const field of required) {
                 const value = document.getElementById(field)?.value;
