@@ -47,27 +47,7 @@
     <h1>링크 생성기</h1>
 
     <form id="linkForm">
-        <div class="mb-3">
-            <label for="project" class="form-label">프로젝트 선택</label>
-            <select id="project" name="project" class="form-select">
-                <option value="COMMON">공통 (COMMON)</option>
-                <option value="DELIVERY">배달 (DELIVERY)</option>
-                <option value="FLOWER">꽃배달 (FLOWER)</option>
-                <option value="TAXI">택시 (TAXI)</option>
-                <option value="DRIVER">대리 (DRIVER)</option>
-                <option value="BUS">버스 (BUS)</option>
-                <option value="MEDICAL">병의원 (MEDICAL)</option>
-                <option value="RESERVE">예약 (RESERVE)</option>
-                <option value="ELECTRIC">전자관 (ELECTRIC)</option>
-                <option value="BIZ">비즈 (BIZ)</option>
-                <option value="BIZ_TAXI">비즈_택시 (BIZ_TAXI)</option>
-                <option value="BIZ_DRIVER">비즈_대리 (BIZ_DRIVER)</option>
-                <option value="BIZ_DELIVERY">비즈_배달 (BIZ_DELIVERY)</option>
-                <option value="BIZ_FLOWER">비즈_꽃배달 (BIZ_FLOWER)</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
+         <div class="mb-3">
             <label for="action" class="form-label">액션 선택</label>
             <select id="action" name="action" class="form-select" onchange="updateFields()">
                 <option value="">-- 선택하세요 --</option>
@@ -94,6 +74,26 @@
                 <option value="ACTION_LINK_ORDER">주문 목록 화면 (ACTION_LINK_ORDER)</option>
             </select>
         </div>
+        
+        <div class="mb-3">
+            <label for="project" class="form-label">프로젝트 선택</label>
+            <select id="project" name="project" class="form-select">
+                <option value="COMMON">공통 (COMMON)</option>
+                <option value="DELIVERY">배달 (DELIVERY)</option>
+                <option value="FLOWER">꽃배달 (FLOWER)</option>
+                <option value="TAXI">택시 (TAXI)</option>
+                <option value="DRIVER">대리 (DRIVER)</option>
+                <option value="BUS">버스 (BUS)</option>
+                <option value="MEDICAL">병의원 (MEDICAL)</option>
+                <option value="RESERVE">예약 (RESERVE)</option>
+                <option value="ELECTRIC">전자관 (ELECTRIC)</option>
+                <option value="BIZ">비즈 (BIZ)</option>
+                <option value="BIZ_TAXI">비즈_택시 (BIZ_TAXI)</option>
+                <option value="BIZ_DRIVER">비즈_대리 (BIZ_DRIVER)</option>
+                <option value="BIZ_DELIVERY">비즈_배달 (BIZ_DELIVERY)</option>
+                <option value="BIZ_FLOWER">비즈_꽃배달 (BIZ_FLOWER)</option>
+            </select>
+        </div>
 
         <div id="dynamicFields"></div>
 
@@ -115,7 +115,7 @@
     <script>
         const actionRequirements = {
             ACTION_LINK_ALARM: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_INQUIRY_WRITE: { required: [], optional: [] ,projects: []},
+            ACTION_LINK_INQUIRY_WRITE: { required: [], optional: [] ,projects: ["COMMON"]},
             ACTION_LINK_MILEAGE: { required: [], optional: [] ,projects: []},
             ACTION_LINK_PAY_MANAGEMENT: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
             ACTION_LINK_COUPON_PUBLISH: { required: [], optional: ["couponCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
