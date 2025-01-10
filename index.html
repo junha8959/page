@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>파라미터5 생성기</title>
+    <title>링크 생성기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -51,18 +51,25 @@
         }
         .sort-dropdown {
             display: inline-block;
-            margin-left: 10px;
+            margin-top: 10px;
             float: right;
             width: auto;
         }
     </style>
 </head>
 <body>
-    <h1>파라미터5 생성기</h1>
+    <h1>링크 생성기</h1>
 
     <form id="linkForm">
         <div class="mb-3">
             <label for="action" class="form-label">액션 선택</label>
+            <select id="sortOptions" class="form-select form-select-sm sort-dropdown" onchange="sortActionsAndReset()">
+                <option value="">정렬 기준</option>
+                <option value="nameAsc">이름순 오름차순</option>
+                <option value="nameDesc">이름순 내림차순</option>
+                <option value="valueAsc">값순 오름차순</option>
+                <option value="valueDesc">값순 내림차순</option>
+            </select>
             <select id="action" name="action" class="form-select" onchange="updateFields()">
                 <option value="">-- 선택하세요 --</option>
                 <option value="ACTION_LINK_ALARM">알림함으로 이동 (ACTION_LINK_ALARM)</option>
@@ -86,13 +93,6 @@
                 <option value="ACTION_LINK_PRODUCT">상품 상세 화면 (ACTION_LINK_PRODUCT)</option>
                 <option value="ACTION_LINK_PRODUCT_SEARCH">상품 검색 화면 (ACTION_LINK_PRODUCT_SEARCH)</option>
                 <option value="ACTION_LINK_ORDER">주문 목록 화면 (ACTION_LINK_ORDER)</option>
-            </select>
-            <select id="sortOptions" class="form-select form-select-sm sort-dropdown" onchange="sortActionsAndReset()">
-                <option value="">정렬 기준</option>
-                <option value="nameAsc">이름순 오름차순</option>
-                <option value="nameDesc">이름순 내림차순</option>
-                <option value="valueAsc">값순 오름차순</option>
-                <option value="valueDesc">값순 내림차순</option>
             </select>
             <div id="actionDescription"></div>
         </div>
@@ -233,7 +233,7 @@
                 queryParams += `&project=${project}`;
             }
             
-            queryParams += `action=${action}`;
+            queryParams = `action=${action}`;
 
 
             for (const field of required) {
@@ -279,9 +279,9 @@
         }
 
         function resetProject() {
-            const projectDropdown = document.getElementById('project');
-            projectDropdown.value = projectDropdown.options[0].value;
-        }
+    const projectDropdown = document.getElementById('project');
+    projectDropdown.value = projectDropdown.options[0].value;
+}
 
         function resetDynamicFields() {
             document.getElementById('dynamicFields').innerHTML = '';
