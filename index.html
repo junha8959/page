@@ -4,59 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>링크 생성기</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 20px;
+        }
+        #generatedLink {
+            margin-top: 20px;
+            text-align: center;
+            word-break: break-word;
+        }
+    </style>
 </head>
 <body>
     <h1>링크 생성기</h1>
 
     <form id="linkForm">
-        <label for="project">project</label>
-        <select id="project" name="project">
-            <option value="COMMON">공통</option>
-            <option value="BUS">버스</option>
-            <option value="DELIVERY">배달</option>
-            <option value="FLOWER">꽃배달</option>
-            <option value="MEDICAL">병의원</option>
-            <option value="RESERVE">예약</option>
-            <option value="TAXI">택시</option>
-            <option value="DRIVER">대리</option>
-            <option value="ELECTRIC">전자관</option>
-            <option value="BIZ">비즈</option>
-            <option value="BIZ_TAXI">비즈_택시</option>
-            <option value="BIZ_DRIVER">비즈_대리</option>
-            <option value="BIZ_DELIVERY">비즈_배달</option>
-            <option value="BIZ_FLOWER">비즈_꽃배달</option>
-        </select>
+        <div class="mb-3">
+            <label for="project" class="form-label">프로젝트 선택</label>
+            <select id="project" name="project" class="form-select">
+                <option value="COMMON">공통</option>
+                <option value="BUS">버스</option>
+                <option value="DELIVERY">배달</option>
+                <option value="FLOWER">꽃배달</option>
+                <option value="MEDICAL">병의원</option>
+                <option value="RESERVE">예약</option>
+                <option value="TAXI">택시</option>
+                <option value="DRIVER">대리</option>
+                <option value="ELECTRIC">전자관</option>
+                <option value="BIZ">비즈</option>
+                <option value="BIZ_TAXI">비즈_택시</option>
+                <option value="BIZ_DRIVER">비즈_대리</option>
+                <option value="BIZ_DELIVERY">비즈_배달</option>
+                <option value="BIZ_FLOWER">비즈_꽃배달</option>
+            </select>
+        </div>
 
-        <label for="action">Action</label>
-        <select id="action" name="action">
-            <option value="shopCode">상점 코드 ShopCode</option>
-            <option value="viewType">뷰타입 ViewType</option>
-            <option value="gungu">군구 Gungu</option>
-            <option value="menuCode">메뉴 코드 Menu Code</option>
-            <option value="productCode">상품 코드 Product Code</option>
-            <option value="eventCode">Event Code</option>
-            <option value="noticeCode">Notice Code</option>
-            <option value="values">Values</option>
-            <option value="keyword">Keyword</option>
-            <option value="couponCode">Coupon Code</option>
-            <option value="itemCd">Item Code</option>
-            <option value="filterCode">Filter Code</option>
-            <option value="categoryCode">Category Code</option>
-            <option value="themaCode">Thema Code</option>
-            <option value="code">Code</option>
-            <option value="chainCode">Chain Code</option>
-            <option value="orderNo">Order Number</option>
-            <option value="tab">Tab</option>
-        </select>
+        <div class="mb-3">
+            <label for="action" class="form-label">액션 선택</label>
+            <select id="action" name="action" class="form-select">
+                <option value="shopCode">상점 코드</option>
+                <option value="viewType">뷰타입</option>
+                <option value="gungu">군구</option>
+                <option value="menuCode">메뉴 코드</option>
+                <option value="productCode">상품 코드</option>
+                <option value="eventCode">이벤트 코드</option>
+                <option value="noticeCode">공지 코드</option>
+                <option value="values">값</option>
+                <option value="keyword">키워드</option>
+                <option value="couponCode">쿠폰 코드</option>
+                <option value="itemCd">아이템 코드</option>
+                <option value="filterCode">필터 코드</option>
+                <option value="categoryCode">카테고리 코드</option>
+                <option value="themaCode">테마 코드</option>
+                <option value="code">코드</option>
+                <option value="chainCode">브랜드 상세 코드</option>
+                <option value="orderNo">주문 번호</option>
+                <option value="tab">탭</option>
+            </select>
+        </div>
 
-        <label for="eventCode">이벤트 게시물 번호</label>
-        <input type="text" id="eventCode" name="eventCode" placeholder="게시물번호">
+        <div class="mb-3">
+            <label for="eventCode" class="form-label">이벤트 게시물 번호</label>
+            <input type="text" id="eventCode" name="eventCode" class="form-control" placeholder="게시물번호">
+        </div>
 
-        <button type="button" onclick="generateLink()">Generate Link</button>
+        <button type="button" class="btn btn-primary w-100" onclick="generateLink()">링크 생성</button>
     </form>
 
-    <h2>Generated Link:</h2>
-    <p id="generatedLink"></p>
+    <h2 class="mt-4">생성된 링크:</h2>
+    <div class="text-center">
+        <p id="generatedLink" class="p-2 bg-light border rounded"></p>
+        <button id="copyButton" class="btn btn-secondary" style="display: none;" onclick="copyToClipboard()">복사</button>
+    </div>
 
     <script>
         function generateLink() {
@@ -67,8 +106,17 @@
 
             const fullLink = `${baseUrl}project=${project}&action=${action}&eventCode=${eventCode}`;
             
-            document.getElementById('generatedLink').innerText = fullLink;
-            document.getElementById('generatedLink').style.color = 'blue';
+            const linkElement = document.getElementById('generatedLink');
+            linkElement.innerText = fullLink;
+
+            document.getElementById('copyButton').style.display = 'inline-block';
+        }
+
+        function copyToClipboard() {
+            const linkElement = document.getElementById('generatedLink');
+            navigator.clipboard.writeText(linkElement.innerText)
+                .then(() => alert('링크가 복사되었습니다!'))
+                .catch(() => alert('복사에 실패했습니다.'));
         }
     </script>
 </body>
