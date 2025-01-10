@@ -137,28 +137,37 @@
             ACTION_LINK_ORDER: { required: [], optional: ["orderNo"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]}
         };
 
-         // 액션 선택 시 호출되는 함수
+        // 액션 선택 시 호출되는 함수
         function updateFields() {
             const action = document.getElementById('action').value;
-            const dynamicFields = document.getElementById('dynamicFields');
             const projectDropdown = document.getElementById('project');
+            const projectDropdownWrapper = projectDropdown.parentElement;
+            const dynamicFields = document.getElementById('dynamicFields');
     
             dynamicFields.innerHTML = '';
-    
-            // 프로젝트 드롭다운 초기화
             projectDropdown.innerHTML = '';
     
-            if (!action || !actionRequirements[action]) return;
+            if (!action || !actionRequirements[action]) {
+                // 액션이 없으면 드롭다운 숨기기
+                projectDropdownWrapper.style.display = 'none';
+                return;
+            }
     
             const { required, optional, projects } = actionRequirements[action];
     
-            // 프로젝트 드롭다운 필터링
-            projects.forEach(project => {
-                const option = document.createElement('option');
-                option.value = project;
-                option.textContent = project;
-                projectDropdown.appendChild(option);
-            });
+            if (projects.length > 0) {
+                // 프로젝트 드롭다운 표시 및 옵션 추가
+                projectDropdownWrapper.style.display = 'block';
+                projects.forEach(project => {
+                    const option = document.createElement('option');
+                    option.value = project;
+                    option.textContent = project;
+                    projectDropdown.appendChild(option);
+                });
+            } else {
+                // 해당 프로젝트가 없으면 드롭다운 숨기기
+                projectDropdownWrapper.style.display = 'none';
+            }
     
             required.forEach(field => {
                 dynamicFields.innerHTML += `
@@ -178,7 +187,7 @@
                 `;
             });
         }
-
+    
         function generateLink() {
             const baseUrl = "https://app.daeguro.co.kr/app/public_link.html?";
             const project = document.getElementById('project').value;
@@ -224,13 +233,15 @@
                 .catch(() => alert('복사에 실패했습니다.'));
         }
 
-        function resetAllFields() {
-            document.getElementById('project').value = 'COMMON';
+         function resetAllFields() {
             document.getElementById('action').value = '';
             document.getElementById('dynamicFields').innerHTML = '';
             document.getElementById('generatedLink').innerText = '';
             document.getElementById('copyButton').style.display = 'none';
+            const projectDropdownWrapper = document.getElementById('project').parentElement;
+            projectDropdownWrapper.style.display = 'none';
         }
+
 
         function resetAction() {
             document.getElementById('action').value = '';
