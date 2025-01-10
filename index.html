@@ -38,7 +38,6 @@
             word-break: break-word;
         }
         #actionDescription {
-            margin-top: 10px;
             padding: 10px;
             background-color: #f1f3f5;
             border: 1px solid #dee2e6;
@@ -136,27 +135,27 @@
 
     <script>
         const actionRequirements = {
-            ACTION_LINK_ALARM: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"], description: "알림 화면으로 이동합니다."},
-            ACTION_LINK_INQUIRY_WRITE: { required: [], optional: [] ,projects: ["COMMON"]},
-            ACTION_LINK_MILEAGE: { required: [], optional: [] ,projects: []},
-            ACTION_LINK_PAY_MANAGEMENT: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_COUPON_PUBLISH: { required: [], optional: ["couponCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_VOUCHER_PRODUCT_LIST: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_VOUCHER: { required: [], optional: ["code"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_NOTICE: { required: ["code"], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_EVENT: { required: ["eventCode"], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_BRAND_LIST: { required: [], optional: ["chainCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_SHOP_LIST: { required: ["itemCd"], optional: ["filterCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_SHOP: { required: ["shopCode"], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_SHOP_SEARCH: { required: [], optional: ["keyword"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_MENU: { required: ["shopCode"], optional: ["menuCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_TRADITION_LIST: { required: [], optional: ["gungu"],projects: ["COMMON", "DELIVERY", "FLOWER"] },
-            ACTION_LINK_TRADITION: { required: ["shopCode"], optional: ["viewType"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_ALLEY: { required: [], optional: ["gungu","code"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_PRODUCT_LIST: { required: [], optional: ["categoryCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_PRODUCT: { required: ["productCode"], optional: ["projectSub","shopCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_PRODUCT_SEARCH: { required: [], optional: ["keyword"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]},
-            ACTION_LINK_ORDER: { required: [], optional: ["orderNo"] ,projects: ["COMMON", "DELIVERY", "FLOWER"]}
+            ACTION_LINK_ALARM: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"], description: "알림화면으로 이동"},
+            ACTION_LINK_INQUIRY_WRITE: { required: [], optional: [] ,projects: ["COMMON"],description: "고객소리함으로 이동\n아마도"},
+            ACTION_LINK_MILEAGE: { required: [], optional: [] ,projects: ["COMMON"],description: "알림화면으로 이동"},
+            ACTION_LINK_PAY_MANAGEMENT: { required: [], optional: [] ,projects: ["COMMON"],description: "알림화면으로 이동"},
+            ACTION_LINK_COUPON_PUBLISH: { required: [], optional: ["couponCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"],description: "알림화면으로 이동"},
+            ACTION_LINK_VOUCHER_PRODUCT_LIST: { required: [], optional: [] ,projects: ["COMMON"],description: "알림화면으로 이동"},
+            ACTION_LINK_VOUCHER: { required: [], optional: ["code"] ,projects: ["COMMON"],description: "알림화면으로 이동"},
+            ACTION_LINK_NOTICE: { required: ["code"], optional: [] ,projects: ["COMMON"],description: "알림화면으로 이동"},
+            ACTION_LINK_EVENT: { required: ["eventCode"], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER", "RESERVE"],description: "알림화면으로 이동"},
+            ACTION_LINK_BRAND_LIST: { required: [], optional: ["chainCode"] ,projects: "DELIVERY"],description: "알림화면으로 이동"},
+            ACTION_LINK_SHOP_LIST: { required: ["itemCd"], optional: ["filterCode"] ,projects: ["DELIVERY"],description: "알림화면으로 이동"},
+            ACTION_LINK_SHOP: { required: ["shopCode"], optional: [] ,projects: ["DELIVERY"],description: "알림화면으로 이동"},
+            ACTION_LINK_SHOP_SEARCH: { required: [], optional: ["keyword"] ,projects: ["DELIVERY"],description: "알림화면으로 이동"},
+            ACTION_LINK_MENU: { required: ["shopCode"], optional: ["menuCode"] ,projects: ["DELIVERY"],description: "알림화면으로 이동"},
+            ACTION_LINK_TRADITION_LIST: { required: [], optional: ["gungu"],projects: ["DELIVERY"],description: "알림화면으로 이동"},
+            ACTION_LINK_TRADITION: { required: ["shopCode"], optional: ["viewType"] ,projects: ["DELIVERY"],description: "알림화면으로 이동"},
+            ACTION_LINK_ALLEY: { required: [], optional: ["gungu","code"] ,projects: ["DELIVERY"],description: "알림화면으로 이동"},
+            ACTION_LINK_PRODUCT_LIST: { required: [], optional: ["categoryCode"] ,projects: ["FLOWER"],description: "알림화면으로 이동"},
+            ACTION_LINK_PRODUCT: { required: ["productCode"], optional: ["projectSub","shopCode"] ,projects: ["DELIVERY", "FLOWER"],description: "알림화면으로 이동"},
+            ACTION_LINK_PRODUCT_SEARCH: { required: [], optional: ["keyword"] ,projects: ["FLOWER"],description: "알림화면으로 이동"},
+            ACTION_LINK_ORDER: { required: [], optional: ["orderNo"] ,projects: ["DELIVERY", "FLOWER"],description: "알림화면으로 이동"}
         };
 
         function updateFields() {
