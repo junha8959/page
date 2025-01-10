@@ -26,7 +26,7 @@
             margin-top: 10px;
         }
         button {
-            margin-top: 20px;
+            margin-top: 10px;
         }
         #generatedLink {
             margin-top: 20px;
@@ -67,6 +67,12 @@
         </div>
 
         <div id="dynamicFields"></div>
+
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-warning" onclick="resetAllFields()">전체 초기화</button>
+            <button type="button" class="btn btn-secondary" onclick="resetAction()">액션 초기화</button>
+            <button type="button" class="btn btn-light" onclick="resetDynamicFields()">필수/선택 초기화</button>
+        </div>
 
         <button type="button" class="btn btn-primary w-100" onclick="generateLink()">링크 생성</button>
     </form>
@@ -160,6 +166,22 @@
             navigator.clipboard.writeText(linkElement.innerText)
                 .then(() => alert('링크가 복사되었습니다!'))
                 .catch(() => alert('복사에 실패했습니다.'));
+        }
+
+        function resetAllFields() {
+            document.getElementById('action').value = '';
+            document.getElementById('dynamicFields').innerHTML = '';
+            document.getElementById('generatedLink').innerText = '';
+            document.getElementById('copyButton').style.display = 'none';
+        }
+
+        function resetAction() {
+            document.getElementById('action').value = '';
+            updateFields();
+        }
+
+        function resetDynamicFields() {
+            document.getElementById('dynamicFields').innerHTML = '';
         }
     </script>
 </body>
