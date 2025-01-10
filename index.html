@@ -61,33 +61,32 @@
 
         <div class="mb-3">
             <label for="action" class="form-label">액션 선택</label>
-            <select id="action" name="action" class="form-select" onchange="updateSubActionVisibility()">
+            <select id="action" name="action" class="form-select" onchange="updateFields()">
                 <option value="">-- 선택하세요 --</option>
-                <option value="ACTION_LINK_EVENT">이벤트</option>
-                <option value="ACTION_LINK_MENU">메뉴</option>
-                <option value="ACTION_LINK_ORDER">주문</option>
+                <option value="ACTION_LINK_ALARM">알림함으로 이동</option>
+                <option value="ACTION_LINK_INQUIRY_WRITE">고객소리함 화면으로 이동</option>
+                <option value="ACTION_LINK_MILEAGE">마일리지 화면으로 이동</option>
+                <option value="ACTION_LINK_PAY_MANAGEMENT">결제수단 관리 화면으로 이동</option>
+                <option value="ACTION_LINK_COUPON_PUBLISH">쿠폰 등록 화면</option>
+                <option value="ACTION_LINK_VOUCHER_PRODUCT_LIST">상품권 구매 화면</option>
+                <option value="ACTION_LINK_VOUCHER">상품권 보관함으로 이동</option>
+                <option value="ACTION_LINK_NOTICE">공지사항 상세</option>
+                <option value="ACTION_LINK_EVENT">이벤트 상세</option>
+                <option value="ACTION_LINK_BRAND_LIST">브랜드 목록 화면</option>
+                <option value="ACTION_LINK_SHOP_SEARCH">상점 검색</option>
+                <option value="ACTION_LINK_SHOP_LIST">상점 목록 화면</option>
+                <option value="ACTION_LINK_MENU">메뉴 상세 화면</option>
+                <option value="ACTION_LINK_TRADITION_LIST">전통시장 목록 화면</option>
+                <option value="ACTION_LINK_TRADITION">전통시장 상세 화면</option>
+                <option value="ACTION_LINK_ALLEY">골목상권 화면</option>
+                <option value="ACTION_LINK_PRODUCT_LIST">상품 목록 화면</option>
+                <option value="ACTION_LINK_PRODUCT">상품 상세 화면</option>
+                <option value="ACTION_LINK_PRODUCT_SEARCH">상품 검색 화면</option>
+                <option value="ACTION_LINK_ORDER">주문 목록 화면</option>
             </select>
         </div>
 
-        <div id="subActionFields" style="display: none;">
-            <div id="subActionEvent" style="display: none;">
-                <div class="mb-3">
-                    <label for="eventCode" class="form-label">이벤트 코드</label>
-                    <input type="text" id="eventCode" name="eventCode" class="form-control" placeholder="이벤트 코드">
-                </div>
-            </div>
-
-            <div id="subActionMenu" style="display: none;">
-                <div class="mb-3">
-                    <label for="shopCode" class="form-label">상점 코드</label>
-                    <input type="text" id="shopCode" name="shopCode" class="form-control" placeholder="상점 코드">
-                </div>
-                <div class="mb-3">
-                    <label for="menuCode" class="form-label">메뉴 코드</label>
-                    <input type="text" id="menuCode" name="menuCode" class="form-control" placeholder="메뉴 코드">
-                </div>
-            </div>
-        </div>
+        <div id="dynamicFields"></div>
 
         <button type="button" class="btn btn-primary w-100" onclick="generateLink()">링크 생성</button>
     </form>
@@ -99,23 +98,44 @@
     </div>
 
     <script>
-        function updateSubActionVisibility() {
+        const actionRequirements = {
+            ACTION_LINK_ALARM: { required: ["project"], optional: [] },
+            ACTION_LINK_INQUIRY_WRITE: { required: ["project"], optional: [] },
+            ACTION_LINK_MILEAGE: { required: ["project"], optional: [] },
+            ACTION_LINK_PAY_MANAGEMENT: { required: ["project"], optional: [] },
+            ACTION_LINK_COUPON_PUBLISH: { required: ["project"], optional: ["couponCode"] },
+            ACTION_LINK_NOTICE: { required: ["project", "code"], optional: [] },
+            ACTION_LINK_EVENT: { required: ["project", "eventCode"], optional: [] },
+            ACTION_LINK_MENU: { required: ["project", "shopCode", "menuCode"], optional: [] },
+            // Add more actions here
+        };
+
+        function updateFields() {
             const action = document.getElementById('action').value;
-            const subActionFields = document.getElementById('subActionFields');
-            const subActionEvent = document.getElementById('subActionEvent');
-            const subActionMenu = document.getElementById('subActionMenu');
+            const dynamicFields = document.getElementById('dynamicFields');
+            dynamicFields.innerHTML = '';
 
-            subActionFields.style.display = 'none';
-            subActionEvent.style.display = 'none';
-            subActionMenu.style.display = 'none';
+            if (!action || !actionRequirements[action]) return;
 
-            if (action === 'ACTION_LINK_EVENT') {
-                subActionFields.style.display = 'block';
-                subActionEvent.style.display = 'block';
-            } else if (action === 'ACTION_LINK_MENU') {
-                subActionFields.style.display = 'block';
-                subActionMenu.style.display = 'block';
-            }
+            const { required, optional } = actionRequirements[action];
+
+            required.forEach(field => {
+                dynamicFields.innerHTML += `
+                    <div class="mb-3">
+                        <label for="${field}" class="form-label">${field}</label>
+                        <input type="text" id="${field}" name="${field}" class="form-control" placeholder="${field}">
+                    </div>
+                `;
+            });
+
+            optional.forEach(field => {
+                dynamicFields.innerHTML += `
+                    <div class="mb-3">
+                        <label for="${field}" class="form-label">(선택) ${field}</label>
+                        <input type="text" id="${field}" name="${field}" class="form-control" placeholder="${field}">
+                    </div>
+                `;
+            });
         }
 
         function generateLink() {
@@ -123,17 +143,32 @@
             const project = document.getElementById('project').value;
             const action = document.getElementById('action').value;
 
-            let additionalParams = '';
-            if (action === 'ACTION_LINK_EVENT') {
-                const eventCode = document.getElementById('eventCode').value;
-                additionalParams = `eventCode=${eventCode}`;
-            } else if (action === 'ACTION_LINK_MENU') {
-                const shopCode = document.getElementById('shopCode').value;
-                const menuCode = document.getElementById('menuCode').value;
-                additionalParams = `shopCode=${shopCode}&menuCode=${menuCode}`;
+            if (!action) {
+                alert('액션을 선택하세요!');
+                return;
             }
 
-            const fullLink = `${baseUrl}project=${project}&action=${action}&${additionalParams}`;
+            const { required, optional } = actionRequirements[action];
+
+            let queryParams = `project=${project}&action=${action}`;
+
+            required.forEach(field => {
+                const value = document.getElementById(field)?.value;
+                if (!value) {
+                    alert(`${field}는 필수 입력 항목입니다.`);
+                    return;
+                }
+                queryParams += `&${field}=${value}`;
+            });
+
+            optional.forEach(field => {
+                const value = document.getElementById(field)?.value;
+                if (value) {
+                    queryParams += `&${field}=${value}`;
+                }
+            });
+
+            const fullLink = `${baseUrl}${queryParams}`;
 
             const linkElement = document.getElementById('generatedLink');
             linkElement.innerText = fullLink;
