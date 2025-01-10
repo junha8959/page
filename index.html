@@ -106,7 +106,7 @@
             ACTION_LINK_COUPON_PUBLISH: { required: ["project"], optional: ["couponCode"] },
             ACTION_LINK_NOTICE: { required: ["project", "code"], optional: [] },
             ACTION_LINK_EVENT: { required: ["project", "eventCode"], optional: [] },
-            ACTION_LINK_MENU: { required: ["project", "shopCode", "menuCode"], optional: [] },
+            ACTION_LINK_MENU: { required: ["shopCode"], optional: [ "menuCode"] },
             // Add more actions here
         };
 
