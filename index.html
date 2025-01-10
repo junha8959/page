@@ -158,15 +158,24 @@
             const projectWrapper = document.getElementById('projectWrapper');
             const projectDropdown = document.getElementById('project');
             const dynamicFields = document.getElementById('dynamicFields');
+            const actionDescription = document.getElementById('actionDescription');
 
             dynamicFields.innerHTML = '';
 
             if (!action || !actionRequirements[action]) {
                 projectWrapper.style.display = 'none';
+                actionDescription.style.display = 'none';
                 return;
             }
 
-            const { required, optional, projects } = actionRequirements[action];
+            const { required, optional, projects, description } = actionRequirements[action];
+
+            if (description) {
+                actionDescription.style.display = 'block';
+                actionDescription.textContent = description;
+            } else {
+                actionDescription.style.display = 'none';
+            }
 
             if (projects.length > 0) {
                 projectWrapper.style.display = 'block';
