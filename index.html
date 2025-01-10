@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Link Generator</title>
+</head>
+<body>
+    <h1>Dynamic Link Generator</h1>
+
+    <form id="linkForm">
+        <label for="project">Select Project:</label>
+        <select id="project" name="project">
+            <option value="COMMON">COMMON</option>
+            <option value="BIZ">BIZ</option>
+            <option value="BUS">BUS</option>
+            <option value="DELIVERY">DELIVERY</option>
+            <option value="ELECTRIC">ELECTRIC</option>
+            <option value="FLOWER">FLOWER</option>
+            <option value="MEDICAL">MEDICAL</option>
+            <option value="RESERVE">RESERVE</option>
+            <option value="TAXI">TAXI</option>
+            <option value="DRIVER">DRIVER</option>
+            <option value="QUICK">QUICK</option>
+            <option value="AD">AD</option>
+            <option value="BIZ_TAXI">BIZ_TAXI</option>
+            <option value="BIZ_DRIVER">BIZ_DRIVER</option>
+            <option value="BIZ_DELIVERY">BIZ_DELIVERY</option>
+            <option value="BIZ_FLOWER">BIZ_FLOWER</option>
+        </select>
+
+        <label for="action">Enter Action:</label>
+        <input type="text" id="action" name="action" placeholder="ACTION_LINK_EVENT">
+
+        <label for="eventCode">Enter Event Code:</label>
+        <input type="text" id="eventCode" name="eventCode" placeholder="게시물번호">
+
+        <button type="button" onclick="generateLink()">Generate Link</button>
+    </form>
+
+    <h2>Generated Link:</h2>
+    <p id="generatedLink"></p>
+
+    <script>
+        function generateLink() {
+            const baseUrl = "https://app.daeguro.co.kr/app/public_link.html?";
+            const project = document.getElementById('project').value;
+            const action = document.getElementById('action').value;
+            const eventCode = document.getElementById('eventCode').value;
+
+            const fullLink = `${baseUrl}project=${project}&action=${action}&eventCode=${eventCode}`;
+            
+            document.getElementById('generatedLink').innerText = fullLink;
+            document.getElementById('generatedLink').style.color = 'blue';
+        }
+    </script>
+</body>
+</html>
