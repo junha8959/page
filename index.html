@@ -73,6 +73,7 @@
                 <option value="ACTION_LINK_PRODUCT_SEARCH">상품 검색 화면 (ACTION_LINK_PRODUCT_SEARCH)</option>
                 <option value="ACTION_LINK_ORDER">주문 목록 화면 (ACTION_LINK_ORDER)</option>
             </select>
+            <button type="button" class="btn btn-outline-primary ms-2" onclick="sortActions()">정렬</button>
         </div>
 
         <div class="mb-3" style="display: none;" id="projectWrapper">
@@ -252,6 +253,18 @@
 
         function resetDynamicFields() {
             document.getElementById('dynamicFields').innerHTML = '';
+        }
+
+        function sortActions() {
+            const actionDropdown = document.getElementById('action');
+            const options = Array.from(actionDropdown.options);
+    
+            const sortedOptions = options.slice(1).sort((a, b) => a.text.localeCompare(b.text));
+    
+            actionDropdown.innerHTML = '';
+            actionDropdown.appendChild(options[0]); // Add the default option
+    
+            sortedOptions.forEach(option => actionDropdown.appendChild(option));
         }
     </script>
 </body>
