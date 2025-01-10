@@ -61,7 +61,7 @@
 
         <div class="mb-3">
             <label for="action" class="form-label">액션 선택</label>
-            <select id="action" name="action" class="form-select">
+            <select id="action" name="action" class="form-select" onchange="updateSubActionFields()">
                 <option value="ACTION_LINK_ALARM">링크 알람</option>
                 <option value="ACTION_LINK_INQUIRY_WRITE">문의 작성</option>
                 <option value="ACTION_LINK_MILEAGE">마일리지</option>
@@ -74,41 +74,14 @@
                 <option value="ACTION_LINK_BRAND_LIST">브랜드 목록</option>
                 <option value="ACTION_LINK_SHOP_SEARCH">상점 검색</option>
                 <option value="ACTION_LINK_SHOP_LIST">상점 목록</option>
-                <option value="ACTION_LINK_SHOP">상점</option>
                 <option value="ACTION_LINK_MENU">메뉴</option>
-                <option value="ACTION_LINK_TRADITION_LIST">전통 목록</option>
-                <option value="ACTION_LINK_TRADITION">전통</option>
-                <option value="ACTION_LINK_ALLEY">골목</option>
                 <option value="ACTION_LINK_PRODUCT_LIST">상품 목록</option>
                 <option value="ACTION_LINK_PRODUCT">상품</option>
-                <option value="ACTION_LINK_PRODUCT_SEARCH">상품 검색</option>
                 <option value="ACTION_LINK_ORDER">주문</option>
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="sub" class="form-label">서브 액션 선택</label>
-            <select id="sub" name="sub" class="form-select">
-                <option value="shopCode">상점 코드</option>
-                <option value="viewType">뷰타입</option>
-                <option value="gungu">군구</option>
-                <option value="menuCode">메뉴 코드</option>
-                <option value="productCode">상품 코드</option>
-                <option value="eventCode">이벤트 코드</option>
-                <option value="noticeCode">공지 코드</option>
-                <option value="values">값</option>
-                <option value="keyword">키워드</option>
-                <option value="couponCode">쿠폰 코드</option>
-                <option value="itemCd">아이템 코드</option>
-                <option value="filterCode">필터 코드</option>
-                <option value="categoryCode">카테고리 코드</option>
-                <option value="themaCode">테마 코드</option>
-                <option value="code">코드</option>
-                <option value="chainCode">브랜드 상세 코드</option>
-                <option value="orderNo">주문 번호</option>
-                <option value="tab">탭</option>
-            </select>
-        </div>
+        <div id="subActionFields"></div>
 
         <div class="mb-3">
             <label for="eventCode" class="form-label">이벤트 게시물 번호</label>
@@ -125,15 +98,47 @@
     </div>
 
     <script>
+        function updateSubActionFields() {
+            const action = document.getElementById('action').value;
+            const subActionFields = document.getElementById('subActionFields');
+            subActionFields.innerHTML = '';
+
+            if (action === 'ACTION_LINK_EVENT') {
+                subActionFields.innerHTML = `
+                    <div class="mb-3">
+                        <label for="eventCode" class="form-label">이벤트 코드</label>
+                        <input type="text" id="eventCode" name="eventCode" class="form-control" placeholder="이벤트 코드">
+                    </div>`;
+            } else if (action === 'ACTION_LINK_MENU') {
+                subActionFields.innerHTML = `
+                    <div class="mb-3">
+                        <label for="shopCode" class="form-label">상점 코드</label>
+                        <input type="text" id="shopCode" name="shopCode" class="form-control" placeholder="상점 코드">
+                    </div>
+                    <div class="mb-3">
+                        <label for="menuCode" class="form-label">메뉴 코드</label>
+                        <input type="text" id="menuCode" name="menuCode" class="form-control" placeholder="메뉴 코드">
+                    </div>`;
+            }
+        }
+
         function generateLink() {
             const baseUrl = "https://app.daeguro.co.kr/app/public_link.html?";
             const project = document.getElementById('project').value;
             const action = document.getElementById('action').value;
-            const sub = document.getElementById('sub').value;
-            const eventCode = document.getElementById('eventCode').value;
 
-            const fullLink = `${baseUrl}project=${project}&action=${action}&${sub}=${eventCode}`;
-            
+            let additionalParams = '';
+            if (action === 'ACTION_LINK_EVENT') {
+                const eventCode = document.getElementById('eventCode').value;
+                additionalParams = `eventCode=${eventCode}`;
+            } else if (action === 'ACTION_LINK_MENU') {
+                const shopCode = document.getElementById('shopCode').value;
+                const menuCode = document.getElementById('menuCode').value;
+                additionalParams = `shopCode=${shopCode}&menuCode=${menuCode}`;
+            }
+
+            const fullLink = `${baseUrl}project=${project}&action=${action}&${additionalParams}`;
+
             const linkElement = document.getElementById('generatedLink');
             linkElement.innerText = fullLink;
 
