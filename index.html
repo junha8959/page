@@ -40,6 +40,26 @@
 
     <form id="linkForm">
         <div class="mb-3">
+            <label for="project" class="form-label">프로젝트 선택</label>
+            <select id="project" name="project" class="form-select">
+                <option value="COMMON">공통</option>
+                <option value="BUS">버스</option>
+                <option value="DELIVERY">배달</option>
+                <option value="FLOWER">꽃배달</option>
+                <option value="MEDICAL">병의원</option>
+                <option value="RESERVE">예약</option>
+                <option value="TAXI">택시</option>
+                <option value="DRIVER">대리</option>
+                <option value="ELECTRIC">전자관</option>
+                <option value="BIZ">비즈</option>
+                <option value="BIZ_TAXI">비즈_택시</option>
+                <option value="BIZ_DRIVER">비즈_대리</option>
+                <option value="BIZ_DELIVERY">비즈_배달</option>
+                <option value="BIZ_FLOWER">비즈_꽃배달</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="action" class="form-label">액션 선택</label>
             <select id="action" name="action" class="form-select" onchange="updateFields()">
                 <option value="">-- 선택하세요 --</option>
@@ -126,6 +146,7 @@
 
         function generateLink() {
             const baseUrl = "https://app.daeguro.co.kr/app/public_link.html?";
+            const project = document.getElementById('project').value;
             const action = document.getElementById('action').value;
 
             if (!action) {
@@ -135,7 +156,7 @@
 
             const { required, optional } = actionRequirements[action];
 
-            let queryParams = `action=${action}`;
+            let queryParams = `project=${project}&action=${action}`;
 
             for (const field of required) {
                 const value = document.getElementById(field)?.value;
@@ -169,6 +190,7 @@
         }
 
         function resetAllFields() {
+            document.getElementById('project').value = 'COMMON';
             document.getElementById('action').value = '';
             document.getElementById('dynamicFields').innerHTML = '';
             document.getElementById('generatedLink').innerText = '';
