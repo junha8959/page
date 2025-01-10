@@ -136,10 +136,10 @@
     <script>
         const actionRequirements = {
             ACTION_LINK_ALARM: { required: [], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER"], description: "알림함으로 이동"},
-            ACTION_LINK_INQUIRY_WRITE: { required: [], optional: [] ,projects: ["COMMON"],description: "고객소리함으로 이동<br>아마도"},
-            ACTION_LINK_MILEAGE: { required: [], optional: [] ,projects: ["COMMON"],description: "알림화면으로 이동"},
-            ACTION_LINK_PAY_MANAGEMENT: { required: [], optional: [] ,projects: ["COMMON"],description: "알림화면으로 이동"},
-            ACTION_LINK_COUPON_PUBLISH: { required: [], optional: ["couponCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"],description: "알림화면으로 이동"},
+            ACTION_LINK_INQUIRY_WRITE: { required: [], optional: [] ,projects: ["COMMON"],description: "고객소리함으로 이동"},
+            ACTION_LINK_MILEAGE: { required: [], optional: [] ,projects: ["COMMON"],description: "마일리지 화면으로 이동"},
+            ACTION_LINK_PAY_MANAGEMENT: { required: [], optional: [] ,projects: ["COMMON"],description: "결제수단 관리 화면으로 이동"},
+            ACTION_LINK_COUPON_PUBLISH: { required: [], optional: ["couponCode"] ,projects: ["COMMON", "DELIVERY", "FLOWER"],description: "쿠폰함 이동/ 쿠폰등록 <br>"},
             ACTION_LINK_VOUCHER_PRODUCT_LIST: { required: [], optional: [] ,projects: ["COMMON"],description: "알림화면으로 이동"},
             ACTION_LINK_VOUCHER: { required: [], optional: ["code"] ,projects: ["COMMON"],description: "알림화면으로 이동"},
             ACTION_LINK_NOTICE: { required: ["code"], optional: [] ,projects: ["COMMON"],description: "알림화면으로 이동"},
@@ -177,7 +177,7 @@
 
             if (description) {
                 actionDescription.style.display = 'block';
-                actionDescription.textContent = description;
+                actionDescription.innerHTML = description; // innerText → innerHTML
             } else {
                 actionDescription.style.display = 'none';
             }
