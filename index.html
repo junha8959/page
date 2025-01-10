@@ -132,17 +132,17 @@
             ACTION_LINK_NOTICE: { required: ["code"], optional: [] ,projects: ["COMMON"], description: "1. 공지사항 상세화면 이동 : [code : 숫자] 게시글 번호 입력"},
             ACTION_LINK_EVENT: { required: ["eventCode"], optional: [] ,projects: ["COMMON", "DELIVERY", "FLOWER", "RESERVE"], description: "1. 이벤트 상세화면 이동 : [code : 숫자] 게시글 번호 입력"},
             ACTION_LINK_BRAND_LIST: { required: [], optional: ["chainCode"] ,projects: ["DELIVERY"], description: "1. 브랜드 목록화면 이동 <br>2. 브랜드 상세화면 이동: [chainCode : 영어/숫자] 브랜드코드 입력"},
-            ACTION_LINK_SHOP_LIST: { required: ["itemCd"], optional: ["filterCode"] ,projects: ["DELIVERY"], description: "1. 상점 목록화면 이동<br>2. 카테고리 추가 : [itemCd : 숫자] 개발자에게 문의<br>3. 필터 조회 : [filterCode : 영어] ONNURI_VOUCHER (온누리상품권) / GOOD_SHOP (착한 매장) / ORDER_MANY (주문 많은순) / NEW_SHOP (신규 매장)"},
+            ACTION_LINK_SHOP_LIST: { required: ["itemCd"], optional: ["filterCode"] ,projects: ["DELIVERY"], description: "1. 상점 목록화면 이동<br>2. 카테고리 추가 : [itemCd : 숫자] 카테고리 코드 입력<br>3. 필터 조회 : [filterCode : 영어] ONNURI_VOUCHER (온누리상품권) / GOOD_SHOP (착한 매장) / ORDER_MANY (주문 많은순) / NEW_SHOP (신규 매장)"},
             ACTION_LINK_SHOP: { required: ["shopCode"], optional: [] ,projects: ["DELIVERY"], description: "1. 상점상세 화면 이동 : [shopCode : 숫자] 상점 코드 입력 "},
             ACTION_LINK_SHOP_SEARCH: { required: [], optional: ["keyword"] ,projects: ["DELIVERY"],description: "1. 배달 검색화면 이동 <br>2. 검색화면 + 키워드 입력 : [keyword : 전체] 원하는 검색 단어"},
             ACTION_LINK_MENU: { required: ["shopCode","menuCode"], optional: [] ,projects: ["DELIVERY"],description: "1. 메뉴상세화면 이동 : [shopCode : 숫자] 상점 코드 입력 <br>[menuCode : 숫자] 메뉴 코드 입력"},
-            ACTION_LINK_TRADITION_LIST: { required: [], optional: ["gungu"],projects: ["DELIVERY"],description: "1. 전통시장 목록화면 이동 <br>2. 군/구 선택 : [gungu : 한글] 원하는 군구 입력 ex:'서구'" },
-            ACTION_LINK_TRADITION: { required: ["shopCode"], optional: ["viewType"] ,projects: ["DELIVERY"],description: "알림화면으로 이동"},
-            ACTION_LINK_ALLEY: { required: [], optional: ["gungu","code"] ,projects: ["DELIVERY"],description: "알림화면으로 이동"},
-            ACTION_LINK_PRODUCT_LIST: { required: [], optional: ["categoryCode"] ,projects: ["FLOWER"],description: "알림화면으로 이동"},
-            ACTION_LINK_PRODUCT: { required: ["productCode"], optional: ["projectSub","shopCode"] ,projects: ["DELIVERY", "FLOWER"],description: "알림화면으로 이동"},
-            ACTION_LINK_PRODUCT_SEARCH: { required: [], optional: ["keyword"] ,projects: ["FLOWER"],description: "알림화면으로 이동"},
-            ACTION_LINK_ORDER: { required: [], optional: ["orderNo"] ,projects: ["DELIVERY", "FLOWER"],description: "알림화면으로 이동"}
+            ACTION_LINK_TRADITION_LIST: { required: [], optional: ["gungu"],projects: ["DELIVERY"],description: "1. 전통시장 목록화면 이동 <br>2. 군/구 선택 : [gungu : 한글] 원하는 군구 입력 ex) 서구" },
+            ACTION_LINK_TRADITION: { required: ["shopCode"], optional: ["viewType"] ,projects: ["DELIVERY"],description: "1. 장보기/전통시장 상세화면 이동(기본 장보기) : [shopCode : 숫자] <br>2. 보이는 기본 방식 변경 : [viewType : 숫자] 1: 장보기 상품 보기 / 2: 개별 상점 보기"},
+            ACTION_LINK_ALLEY: { required: [], optional: ["gungu","code"] ,projects: ["DELIVERY"],description: "1. 골목시장 목록화면 이동 <br>2. 군/구 선택 : [gungu : 한글] 원하는 군구 입력 ex) 서구 <br>3. 골목 상세 선택 : [code : 숫자] 골목 코드 입력"},
+            ACTION_LINK_PRODUCT_LIST: { required: [], optional: ["categoryCode"] ,projects: ["FLOWER"],description: "1. 꽃배달 상품 목록 화면 이동 <br>2. 카테고리 선택 : [categoryCode : 숫자] 카테고리 코드 입력"},
+            ACTION_LINK_PRODUCT: { required: ["productCode"], optional: ["projectSub","shopCode"] ,projects: ["DELIVERY", "FLOWER"],description: "1. 전통시장 상품상세 화면 이동 : [project DELIVERY 선택] [prjectSub : 영어] 'TRADITION' 입력 [shopCode : 숫자] 상점코드 입력 [productCode : 숫자] 상품코드 입력<br>2. 꽃배달 상품 상세 화면 이동 : [productCode : 숫자] 상품코드 입력"},
+            ACTION_LINK_PRODUCT_SEARCH: { required: [], optional: ["keyword"] ,projects: ["FLOWER"],description: "1. 꽃배달 검색화면 이동 <br>2. 검색화면 + 키워드 입력 : [keyword : 전체] 원하는 검색 단어"},
+            ACTION_LINK_ORDER: { required: [], optional: ["orderNo"] ,projects: ["DELIVERY", "FLOWER"],description: "1. 주문목록 화면으로 이동 <br> 2.주문내역 화면으로 이동 : [orderNo : 숫자] 오더번호 입력"}
         };
 
         function updateFields() {
