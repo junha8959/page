@@ -49,6 +49,10 @@
             text-align: center;
             margin-top: 20px;
         }
+        .sort-dropdown {
+            display: inline-block;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -56,14 +60,15 @@
 
     <form id="linkForm">
         <div class="mb-3">
-            <label for="action" class="form-label">액션 선택</label>
-            <select id="sortOptions" class="form-select ms-2" onchange="sortActions()">
-                    <option value="">-- 정렬 기준 선택 --</option>
+            <label for="action" class="form-label">액션 선택
+                <select id="sortOptions" class="form-select form-select-sm sort-dropdown" onchange="sortActions()">
+                    <option value="">정렬 기준</option>
                     <option value="nameAsc">이름순 오름차순</option>
                     <option value="nameDesc">이름순 내림차순</option>
                     <option value="valueAsc">값순 오름차순</option>
                     <option value="valueDesc">값순 내림차순</option>
-            </select>
+                </select>
+            </label>
             <select id="action" name="action" class="form-select" onchange="updateFields()">
                 <option value="">-- 선택하세요 --</option>
                 <option value="ACTION_LINK_ALARM">알림함으로 이동 (ACTION_LINK_ALARM)</option>
@@ -115,7 +120,7 @@
 
         <div class="d-flex justify-content-between">
             <button type="button" class="btn btn-warning" onclick="resetAllFields()">전체 초기화</button>
-            <button type="button" class="btn btn-secondary" onclick="resetAction()">액션 초기화</button>
+            <button type="button" class="btn btn-secondary" onclick="resetProject()">프로젝트 초기화</button>
             <button type="button" class="btn btn-light" onclick="resetDynamicFields()">필수/선택 초기화</button>
         </div>
 
@@ -268,18 +273,18 @@
             document.getElementById('copyButton').style.display = 'none';
             const projectWrapper = document.getElementById('projectWrapper');
             projectWrapper.style.display = 'none';
+            document.getElementById('project').value = '';
         }
 
-        function resetAction() {
-            document.getElementById('action').value = '';
-            updateFields();
+        function resetProject() {
+            document.getElementById('project').value = '';
         }
 
         function resetDynamicFields() {
             document.getElementById('dynamicFields').innerHTML = '';
         }
 
-           function sortActions() {
+        function sortActions() {
             const actionDropdown = document.getElementById('action');
             const sortOption = document.getElementById('sortOptions').value;
             const options = Array.from(actionDropdown.options);
